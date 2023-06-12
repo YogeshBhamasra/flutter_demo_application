@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Product {
   Image productImage;
@@ -7,7 +8,8 @@ class Product {
   double weight;
   double price;
   int pieces;
-  var count = 0;
+  RxDouble get totalPrice => (count.value * price).obs;
+  RxInt count;
   Product({
     required this.productImage,
     required this.pricePerKG,
@@ -15,5 +17,6 @@ class Product {
     required this.weight,
     required this.price,
     required this.pieces,
+    required this.count,
   });
 }

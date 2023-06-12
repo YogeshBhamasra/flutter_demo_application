@@ -1,8 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_demo_application/controllers/product_controller.dart';
 import 'package:flutter_demo_application/models/cart_product_model.dart';
+import 'package:flutter_demo_application/view_model/cart_vm.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class CartProductView extends StatelessWidget {
   final Product product;
@@ -12,6 +13,7 @@ class CartProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    CartVM controller = Get.find<CartVM>();
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -31,7 +33,7 @@ class CartProductView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
+              children: [
                 const SizedBox(
                   height: 5.0,
                 ),
@@ -96,6 +98,7 @@ class CartProductView extends StatelessWidget {
                 Row(
                   children: [
                     SizedBox(
+                      height: 30.0,
                       width: width * 0.3,
                       child: InkWell(
                         splashColor: Colors.transparent,
@@ -115,31 +118,36 @@ class CartProductView extends StatelessWidget {
                               GestureDetector(
                                 onTap: () {
                                   //product remove function
+                                  controller.decreaseProduct(product);
                                 },
                                 child: const Text("-"),
                               ),
-                              SizedBox(
-                                width: width * 0.14,
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  child: DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: const Color.fromRGBO(
-                                            179, 179, 179, 1),
-                                        width: 1.0,
+                              Obx(
+                                () => SizedBox(
+                                  width: width * 0.14,
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    child: DecoratedBox(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: const Color.fromRGBO(
+                                              179, 179, 179, 1),
+                                          width: 1.0,
+                                        ),
+                                        shape: BoxShape.rectangle,
                                       ),
-                                      shape: BoxShape.rectangle,
+                                      child: Center(
+                                          child:
+                                              Text("${product.count.value}")),
                                     ),
-                                    child:
-                                        Center(child: Text("${product.count}")),
                                   ),
                                 ),
                               ),
                               GestureDetector(
                                 onTap: () {
                                   //product add function
+                                  controller.increaseProduct(product);
                                 },
                                 child: const Text("+"),
                               ),
@@ -149,7 +157,10 @@ class CartProductView extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Image.asset("assets/images/bin.png"),
+                    GestureDetector(
+                      onTap: () => controller.removeProduct(product),
+                      child: Image.asset("assets/images/bin.png"),
+                    ),
                     SizedBox(
                       width: 10.0,
                     ),
