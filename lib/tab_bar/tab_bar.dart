@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_demo_application/pages/homePage.dart';
+import 'package:flutter_demo_application/pages/cart_page.dart';
+import 'package:flutter_demo_application/pages/home_page.dart';
 import 'package:flutter_demo_application/pages/login_page.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({super.key});
@@ -18,12 +18,9 @@ class _CustomTabBarState extends State<CustomTabBar> {
     fontFamily: "Montserrat",
   );
   static const List<Widget> _screens = <Widget>[
+    Cart(),
     HomePage(),
     LoginPage(),
-    Text(
-      "Index 2: Person",
-      style: tabBarStyle,
-    ),
     Text(
       "Index 3: Settings",
       style: tabBarStyle,
@@ -46,19 +43,19 @@ class _CustomTabBarState extends State<CustomTabBar> {
         type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: ImageIcon(AssetImage("assets/images/home_icon.png")),
             label: "Tienda",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_rounded),
+            icon: ImageIcon(AssetImage("assets/images/cart_icon.png")),
             label: "Reordenar",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: ImageIcon(AssetImage("assets/images/account_icon.png")),
             label: "Cuenta",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.more_vert_rounded),
+            icon: ImageIcon(AssetImage("assets/images/more_icon.png")),
             label: "Más",
           ),
         ],

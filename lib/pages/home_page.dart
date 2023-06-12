@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(name),
       ),
-      drawer: Drawer(),
+      drawer: const Drawer(),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(10),
